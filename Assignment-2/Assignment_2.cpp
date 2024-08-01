@@ -246,27 +246,39 @@ public:
 ⁡⁣⁢⁣Design a Stack With Increment Operation⁡
 https://leetcode.com/problems/design-a-stack-with-increment-operation/submissions/1339649727/
 
-class StockSpanner {
-public:
-    int index;
-    stack<pair<int,int>> st;
-    StockSpanner() {
-        index =-1; 
-        // st.clear();
+class CustomStack {
+    public:
+    vector<int> stack;
+    int len;
+
+    CustomStack(int maxSize) {
+        this->len=maxSize;
     }
     
-    int next(int price) {
-        index+=1;
-        int ans;
-        while(!st.empty() && st.top().first<= price )
-        {
-            st.pop();
+    void push(int x) {
+        if(stack.size()<len){
+            stack.push_back(x);
         }
-        ans = index - (st.empty()? -1: st.top().second);
-        st.push({price,index});
-        return ans;
+    }
+    
+    int pop() {
+        if(stack.empty()) return -1;
+
+        else{
+            int temp=stack.back();
+            stack.pop_back();
+            return temp;
+        }
+    }
+    
+    void increment(int k, int val) {
+        for(int i=0;i<k && i<stack.size();i++){
+            stack[i]+=val;
+        }
     }
 };
+
+
 
 
 */
